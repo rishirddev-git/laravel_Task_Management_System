@@ -1,59 +1,41 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+✨ **Key Features**
+•	Full CRUD Lifecycle: Create, Read, Update, and Delete tasks with a clean Bootstrap UI.
+•	Asynchronous Status Toggling: Update task completion status instantly using AJAX (Fetch API) without page reloads.
+•	Form Validation: Server-side validation with real-time Bootstrap error feedback for mandatory fields.
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+## 🛠 Tech Stack
+* **Framework:** Laravel 12.53.0
+* **Language:** PHP 8.2.12
+* **Frontend:** Bootstrap 5.3 (Vanilla JS / Fetch API)
+* **Database:** MySQL (with Eloquent ORM & Soft Deletes)
+* **Tools:** Composer
+🧠 **Assumptions**
+In building this project, I made the following technical assumptions:
+•	PHP Version: Assumed PHP 8.2+ as required by Laravel 12.
+•	Database: Configured for MySQL (or SQLite if that's what you used).
+•	Authentication: Assumed only registered users should manage tasks (handled via auth middleware).
+•	Soft Deletes: Assumed "deleting" a task should preserve data in the background for safety rather than permanent removal.
+📋 **Prerequisites**
+•	Local Server: XAMPP, supporting PHP 8.2+ and MySQL.
+•	Composer: For managing PHP dependencies.
+## 👤 Admin Access & Logic
+For the purpose of this CRUD, the application identifies the **Administrator** based on the Primary Key:
+* **User ID 1** is granted Admin privileges.
+* **Admin Features:** Only User ID 1 can view the "all the task added on Admin Dashboard" and delete any task.
 
-## About Laravel
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+### 👤 Admin Account Setup
+Since this application uses **User ID 1** for Administrative privileges, you must create at least two users. You can do this quickly via Laravel Tinker:
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+1. Open Tinker:
+   ```bash
+   php artisan tinker
+2. Run these commands to create the Admin (ID 1):
+$user = new App\Models\User();
+$user->name = "Admin";
+$user->email = "admin@gmail.com";
+$user->password = Hash::make('123');
+$user->save();
 
-## Learning Laravel
-
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework. You can also check out [Laravel Learn](https://laravel.com/learn), where you will be guided through building a modern Laravel application.
-
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
-
-## Laravel Sponsors
-
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
-
-### Premium Partners
-
-- **[Vehikl](https://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development)**
-- **[Active Logic](https://activelogic.com)**
-
-## Contributing
-
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
-
-## Code of Conduct
-
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
-
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
-
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+**Note: The application uses User ID 1 as the Administrator. To ensure you have access to admin-only features (like deleting any task), the very first user you create must be your Admin account**
